@@ -23,7 +23,7 @@ app.get("/", async (req, res) => {
 app.use(
     cors({
         origin: [
-            "https://dashboard-theta-one-42.vercel.app/",
+            "https://dashboard-theta-one-42.vercel.app",
             "https://stock-trading-nwil.vercel.app"
         ],
         credentials: true
