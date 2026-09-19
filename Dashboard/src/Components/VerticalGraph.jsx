@@ -35,3 +35,16 @@ export const options = {
 export function VerticalGraph({data}) {
     return <Bar options={options} data={data} />;
 }
+
+
+// export function VerticalGraph({ data }) {
+
+//     console.log("GRAPH DATA:", data);
+//     console.log("DATASETS:", data?.datasets);
+
+//     if (!data || !Array.isArray(data.datasets)) {
+//         return <p>Chart data is not available</p>;
+//     }
+
+//     return <Bar options={options} data={data} />;
+// }

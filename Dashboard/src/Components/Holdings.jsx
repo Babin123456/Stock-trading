@@ -9,13 +9,13 @@ export default function Holdings() {
 
   useEffect(() => {
     const fetchHoldings = async () => {
-      const response = ClientServer.get("/allHoldings");
+      const response = await ClientServer.get("/allHoldings");
 
-      console.log(response.data);
+      // console.log(response.data);
 
       setAllHoldings(response.data);
     }
-
+    fetchHoldings();
   }, [])
 
 

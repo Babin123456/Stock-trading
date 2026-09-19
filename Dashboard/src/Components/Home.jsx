@@ -11,10 +11,10 @@ export default function Home() {
       try {
         const res = await ClientServer.get("/me");
 
-        console.log("Logged in user:", res.data.user);
+        // console.log("Logged in user:", res.data.user);
       } catch (error) {
         if (error.response?.status === 401) {
-          window.location.href = "https://stock-trading-nwil.vercel.app/login";
+          window.location.href = "https://dashboard-theta-one-42.vercel.app/login";
         }
       }
     };

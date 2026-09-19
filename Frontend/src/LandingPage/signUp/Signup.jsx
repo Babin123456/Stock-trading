@@ -33,14 +33,13 @@ const Signup = () => {
         },
         // { withCredentials: true }
       );
-      // console.log("res is :", res);
-      // console.log("res message is :", res.data.message);
+     
       setMessage(res.data.message);
 
       const { message } = res.data;
       const { status } = res;
       
-      // console.log("status is ", status);
+    
       if (status == 200) {
         handleSuccess(message);
         setTimeout(() => {

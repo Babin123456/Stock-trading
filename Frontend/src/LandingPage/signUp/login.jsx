@@ -7,7 +7,6 @@ import clientServer from "../../clientServer";
 
 const Login = () => {
 
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -29,15 +28,13 @@ const Login = () => {
                 },
 
             );
-            // console.log("res is", res);
-            // console.log("res is", res.data);
+            
             const { message } = res.data;
             const status = res.status
-            // console.log("status is", status);
             if (status == 200) {
                 handleSuccess(message);
                 setTimeout(() => {
-                    window.location.href = "https://dashboard-theta-one-42.vercel.app/";
+                    window.location.href = "http://localhost:5174";
                 }, 2000);
             } else {
                 handleError(message);
