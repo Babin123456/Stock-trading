@@ -28,13 +28,13 @@ const Login = () => {
                 },
 
             );
-            
+
             const { message } = res.data;
             const status = res.status
             if (status == 200) {
                 handleSuccess(message);
                 setTimeout(() => {
-                    window.location.href = "http://localhost:5174";
+                    window.location.href = "https://dashboard-theta-one-42.vercel.app";
                 }, 2000);
             } else {
                 handleError(message);
