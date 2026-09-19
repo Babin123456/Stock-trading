@@ -47,3 +47,31 @@ The dashboard acts as the central control room for the portfolio.
 │  WIPRO       │             PORTFOLIO CHART                 │
 │              │                                              │
 └──────────────┴──────────────────────────────────────────────┘
+
+
+
+⚙️ Run Locally
+
+1. Clone
+git clone https://github.com/MUSKANNISHAD/Stock-trading.git
+cd Stock-trading
+
+2.Backend
+cd backend
+npm install
+
+PORT=3000
+MONGO_URL=your_mongodb_url
+JWT_SECRET=your_secret
+
+npm run dev
+
+3. Dashboard
+cd Dashboard
+npm install
+
+create .env
+VITE_API_URL=http://localhost:3000
+
+start vite
+npm run dev
