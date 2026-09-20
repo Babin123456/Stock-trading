@@ -14,17 +14,18 @@ code {
 
 .dashboard-container {
   width: 100%;
-  height: 90vh;
+  height: calc(100vh - 10vh);
   display: flex;
-  align-items: center;
   box-sizing: border-box;
 }
 
 .content {
-  flex-basis: 68%;
+  flex: 1;
+  min-width: 0;
   height: 100%;
   box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 3% 2%;
 }
 
@@ -103,7 +104,7 @@ code {
   justify-content: space-between;
 }
 
-.table .data > * {
+.table .data>* {
   margin-bottom: 5%;
 }
 
@@ -250,7 +251,8 @@ code {
 }
 
 .menu-container {
-  flex-basis: 68%;
+  flex: 1;
+  min-width: 0;
   height: 100%;
   padding: 10px 20px;
   box-sizing: border-box;
@@ -408,11 +410,11 @@ hr {
 }
 
 .order-table tr td:first-child p {
-    background: rgb(255, 197, 197);
-    color: rgb(233, 120, 120);
-    width: 50%;
-    text-align: center;
-    border-radius: 2px;
+  background: rgb(255, 197, 197);
+  color: rgb(233, 120, 120);
+  width: 50%;
+  text-align: center;
+  border-radius: 2px;
 }
 
 .order-table tr td:last-child {
@@ -577,7 +579,7 @@ hr {
 }
 
 .indices-container {
-  flex-basis: 32%;
+  flex: 0 0 32%;
   height: 100%;
   padding: 10px 20px;
   border-right: 1px solid rgb(224, 224, 224);
@@ -602,8 +604,8 @@ hr {
   justify-content: space-evenly;
 }
 
-.nifty > *,
-.sensex > * {
+.nifty>*,
+.sensex>* {
   margin-right: 8px;
 }
 
@@ -627,18 +629,18 @@ hr {
   color: rgb(146, 146, 146);
 }
 
-/* sudo selectors */
 .index:hover {
   cursor: pointer;
 }
 
 .watchlist-container {
-  flex-basis: 32%;
+  flex: 0 0 32%;
+  min-width: 250px;
   height: 100%;
   box-sizing: border-box;
-  box-shadow: 0px 0px 4px 1px rgb(236, 235, 235);
   overflow-y: auto;
-  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 4px 1px rgb(236, 235, 235);
 }
 
 .search-container {
@@ -650,12 +652,14 @@ hr {
 
 .search {
   width: 100%;
-  height: 6%;
+  height: 48px;
+  box-sizing: border-box;
   border: none;
   padding: 15px 20px;
+  padding-right: 60px;
   font-size: 0.9rem;
   font-weight: 400;
-  color: rgb(241, 241, 241);
+  color: rgb(70, 70, 70);
   border-bottom: 0.8px solid rgb(235, 234, 234);
 }
 
@@ -687,28 +691,28 @@ hr {
   position: relative;
 }
 
-.item-info {
+.itemInfo {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.item-info > * {
+.itemInfo>* {
   margin-right: 8px;
 }
 
-.item-info span:nth-child(1) {
+.itemInfo span:nth-child(1) {
   color: rgb(141, 141, 141);
   flex: 1;
 }
 
-.item-info span:nth-child(2) {
+.itemInfo span:nth-child(2) {
   color: rgb(223, 73, 73);
   margin-right: 12px;
   flex: 2;
 }
 
-.item-info span:nth-child(3) {
+.itemInfo span:nth-child(3) {
   color: rgb(223, 73, 73);
   flex: 1;
 }
@@ -812,7 +816,7 @@ hr {
   background-color: #f3f3f3;
 }
 
-.list li:hover > .actions {
+.list li:hover>.actions {
   display: flex;
   cursor: move;
 }
@@ -843,4 +847,266 @@ hr {
 }
 
 
+@media screen and (max-width: 1000px) {
 
+  .topbar-container {
+    height: 70px;
+  }
+
+  .indices-container {
+    flex: 0 0 30%;
+    padding: 10px;
+  }
+
+  .menu-container {
+    padding: 10px 15px;
+  }
+
+  .menus li {
+    margin-right: 18px;
+  }
+
+  .dashboard-container {
+    height: calc(100vh - 70px);
+  }
+
+  .watchlist-container {
+    flex: 0 0 35%;
+    min-width: 220px;
+  }
+
+  .content {
+    padding: 30px 20px;
+  }
+
+  .order-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .order-table table {
+    min-width: 650px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+
+  .topbar-container {
+    height: auto;
+    min-height: 60px;
+    flex-wrap: wrap;
+  }
+
+  .indices-container {
+    display: none;
+  }
+
+  .menu-container {
+    width: 100%;
+    flex: 1;
+    height: 60px;
+    padding: 8px 12px;
+  }
+
+  .menus {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .menus ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    width: max-content;
+  }
+
+  .menus li {
+    margin-right: 18px;
+    flex-shrink: 0;
+  }
+
+  .menu {
+    font-size: 0.78rem;
+  }
+
+  .profile {
+    margin-left: 10px;
+    flex-shrink: 0;
+  }
+
+  .profile .username {
+    display: none;
+  }
+
+
+  .dashboard-container {
+    width: 100%;
+    height: auto;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .watchlist-container {
+    width: 100%;
+    flex: none;
+    min-width: 0;
+    height: auto;
+    max-height: 280px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .search {
+    width: 100%;
+    height: 48px;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .list li {
+    padding: 10px 12px;
+  }
+
+
+  .content {
+    width: 100%;
+    flex: none;
+    min-width: 0;
+    height: auto;
+    min-height: 500px;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+
+  .order-table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .order-table table {
+    width: 100%;
+    min-width: 650px;
+  }
+
+
+  .row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .col {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .col h5 {
+    font-size: 1.5rem;
+  }
+
+
+  .content canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .watchlist-container canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+
+  .menu-container {
+    padding: 8px 10px;
+  }
+
+  .menus li {
+    margin-right: 14px;
+  }
+
+  .menu {
+    font-size: 0.72rem;
+  }
+
+  .profile {
+    margin-left: 5px;
+  }
+
+  .profile .avatar {
+    width: 28px;
+    height: 28px;
+    margin-right: 0;
+  }
+
+  .content {
+    padding: 20px 10px;
+  }
+
+  .title {
+    font-size: 1.15rem;
+  }
+
+  .order-table th,
+  .order-table td {
+    padding: 9px 8px;
+  }
+
+  .row {
+    gap: 10px;
+  }
+
+  .col h5 {
+    font-size: 1.3rem;
+  }
+
+  .watchlist-container {
+    max-height: 250px;
+  }
+}
+
+
+
+@media screen and (max-width: 360px) {
+
+  .menu-container {
+    padding: 8px;
+  }
+
+  .menu {
+    font-size: 0.68rem;
+  }
+
+  .content {
+    padding: 15px 8px;
+  }
+
+  .watchlist-container {
+    max-height: 230px;
+  }
+
+  .order-table table {
+    min-width: 600px;
+  }
+}
