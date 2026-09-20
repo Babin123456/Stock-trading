@@ -13,6 +13,7 @@ export default function Positions() {
       console.log("all positions data are", response.data);
       SetAllPositions(response.data);
     }
+    fetchPositions();
   }, [])
 
   return (
