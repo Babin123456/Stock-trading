@@ -13,6 +13,9 @@ export const PositionSchema = new Schema({
     avg: {
         type: Number
     },
+    price: {
+        type: Number
+    },
     net: {
         type: String
     },
