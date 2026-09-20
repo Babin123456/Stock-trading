@@ -11,7 +11,7 @@ export const WatchList = () => {
 
   const data = {
     labels,
-    Dataset: [
+    datasets: [
       {
         label: 'Price',
         data: watchlist.map((stock) => stock.price),
