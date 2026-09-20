@@ -9,5 +9,5 @@ export function DoughnutChart({ data }) {
     return <p>Doughnut data is missing</p>;
   }
 
-  return <DoughnutChart data={data} />;
+  return <Doughnut data={data} />;
 }
