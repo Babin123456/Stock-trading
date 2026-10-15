@@ -1,0 +1,111 @@
+
+/* About Hero section */
+
+@media (max-width: 767px) {
+  .container > .row.p-5 > h1.fs-2.text-center {
+    font-size: 1.35rem !important;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+
+  .container > .row.p-5 {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .container > .row.p-5.mt-5.border-top.text-muted {
+    margin-top: 1.5rem !important;
+    padding: 1.5rem 1rem !important;
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
+  }
+
+  .container > .row.p-5.mt-5.border-top.text-muted > .col-6 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 !important;
+  }
+
+  .container > .row.p-5.mt-5.border-top.text-muted p {
+    overflow-wrap: break-word;
+  }
+
+  .container > .row.p-5.mt-5.border-top.text-muted > .col-6 + .col-6 {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Small phones */
+
+@media (max-width: 380px) {
+  .container > .row.p-5 > h1.fs-2.text-center {
+    font-size: 1.2rem !important;
+  }
+
+  .container > .row.p-5.mt-5.border-top.text-muted {
+    padding: 1rem 0.75rem !important;
+  }
+}
+
+
+
+
+/* About Team section */
+
+@media (max-width: 767px) {
+  .container > .row.p-3.mt-5.border-top > h1 {
+    font-size: 1.7rem;
+  }
+
+  .container > .row.p-3.mt-5.border-top {
+    padding: 1rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .container > .row.p-3.text-muted {
+    padding: 0.75rem !important;
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+  }
+
+  .container > .row.p-3.text-muted > .col-6 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 0.5rem !important;
+  }
+
+  .container > .row.p-3.text-muted > .col-6:first-child img {
+    display: block;
+    width: 50% !important;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .container > .row.p-3.text-muted > .col-6:first-child h4 {
+    margin-top: 1.5rem !important;
+    font-size: 1.25rem;
+  }
+
+  .container > .row.p-3.text-muted > .col-6 p {
+    overflow-wrap: break-word;
+  }
+
+  .container > .row.p-3.text-muted a {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Small phones */
+
+@media (max-width: 380px) {
+  .container > .row.p-3.text-muted > .col-6:first-child img {
+    width: 60% !important;
+  }
+
+  .container > .row.p-3.text-muted {
+    padding: 0.5rem !important;
+  }
+}
+

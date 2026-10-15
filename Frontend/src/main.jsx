@@ -13,6 +13,8 @@ import ProductPage from './LandingPage/Products/productPage.jsx';
 import PricingPage from './LandingPage/Pricing/PricingPage.jsx';
 import { MyProvider } from './AuthContext.jsx';
 import Login from './LandingPage/signUp/login.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 createRoot(document.getElementById('root')).render(
   <MyProvider>

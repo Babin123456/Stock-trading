@@ -1,0 +1,183 @@
+#supportHero {
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+#supportWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+#supportWrapper h4 {
+  margin: 0;
+}
+
+#supportWrapper a {
+  text-decoration: none;
+}
+
+#supportHero > .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+#supportHero > .row > .col-6 {
+  min-width: 0;
+}
+
+#supportHero input {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#supportHero .col-6 a {
+  display: inline-block;
+  margin: 0.4rem 0.75rem 0.4rem 0;
+  overflow-wrap: anywhere;
+}
+
+#supportHero ol {
+  padding-left: 1.25rem;
+}
+
+#supportHero li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+  #supportWrapper {
+    padding: 1.5rem 1rem !important;
+  }
+
+  #supportHero > .row {
+    padding: 1rem !important;
+    margin: 0 !important;
+  }
+
+  #supportHero > .row > .col-6 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 0 !important;
+  }
+
+  #supportHero h1 {
+    font-size: 1.4rem !important;
+    line-height: 1.4;
+  }
+
+  #supportHero input {
+    font-size: 1rem;
+  }
+
+  #supportHero .col-6 a {
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 380px) {
+  #supportWrapper {
+    gap: 0.75rem;
+  }
+
+  #supportHero > .row > .col-6 {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+
+  #supportHero h1 {
+    font-size: 1.25rem !important;
+  }
+}
+
+
+.container > .row.p-5.mt-5.mb-5 {
+  min-width: 0;
+}
+
+.container > .row.p-5.mt-5.mb-5 > h1 {
+  width: 100%;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.container > .row.p-5.mt-5.mb-5 > .col-4 {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.container > .row.p-5.mt-5.mb-5 h4 {
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.container > .row.p-5.mt-5.mb-5 a {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+  .container > .row.p-5.mt-5.mb-5 {
+    padding: 1.5rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .container > .row.p-5.mt-5.mb-5 > .col-4 {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .container > .row.p-5.mt-5.mb-5 {
+    padding: 1rem !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .container > .row.p-5.mt-5.mb-5 > h1 {
+    font-size: 1.4rem !important;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .container > .row.p-5.mt-5.mb-5 > .col-4 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    padding: 1.25rem 0.75rem !important;
+    margin: 0 !important;
+  }
+
+  .container > .row.p-5.mt-5.mb-5 h4 {
+    font-size: 1.15rem;
+  }
+
+  .container > .row.p-5.mt-5.mb-5 a {
+    line-height: 1.8 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .container > .row.p-5.mt-5.mb-5 {
+    padding: 0.5rem !important;
+  }
+
+  .container > .row.p-5.mt-5.mb-5 > .col-4 {
+    padding: 1rem 0.5rem !important;
+  }
+}
+

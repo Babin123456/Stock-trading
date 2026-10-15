@@ -1,5 +1,6 @@
 import React from 'react';
 // import Hero from './Hero';
+import { Link } from 'react-router-dom';
 
 export default function Universe() {
   return (
@@ -32,7 +33,9 @@ export default function Universe() {
           <img src="/media/goldenpiLogo.png" />
           <p className='text-muted text-small'></p>
         </div>
-        <button style={{ width: "30%", margin: "0 auto" }} type="button" className="btn btn-primary fs-5">Signup Now</button>
+        <button style={{ width: "30%", margin: "0 auto" }} type="button" className="btn btn-primary fs-5">
+          <Link className='SignupForm' to="/signup">Signup Now </Link>
+        </button>
 
 
       </div>
