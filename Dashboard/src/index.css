@@ -1110,3 +1110,147 @@ hr {
     min-width: 600px;
   }
 }
+
+
+/* Orders Page & Order History Enhancements */
+.orders-page {
+  width: 100%;
+}
+
+.orders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.order-filter-group {
+  display: flex;
+  gap: 8px;
+}
+
+.order-filter-btn {
+  background: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.order-filter-btn:hover {
+  background: #e8e8e8;
+  color: #222;
+}
+
+.order-filter-btn.active {
+  background: #4184f3;
+  color: #fff;
+  border-color: #4184f3;
+}
+
+.order-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.badge-buy {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.badge-sell {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.status-completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-rejected {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-pending {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+.instrument-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.text-muted {
+  color: #888;
+  font-size: 0.82rem;
+}
+
+.order-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  color: #777;
+}
+
+.order-loading-container .spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #f0f0f0;
+  border-top: 3px solid #4184f3;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.order-error-card {
+  background: #fff3f3;
+  border: 1px solid #ffcdd2;
+  border-radius: 6px;
+  padding: 24px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.order-error-card .error-title {
+  color: #c62828;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.order-error-card .error-desc {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0 0 16px 0;
+}
