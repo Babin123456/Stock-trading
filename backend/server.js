@@ -14,18 +14,40 @@ const PORT = process.env.PORT || 3000;
 const mongodb = process.env.MONGO_URL;
 import cookieParser from "cookie-parser";
 
-mongoose.connect(mongodb);
+if (mongodb) {
+    mongoose
+        .connect(mongodb)
+        .then(() => console.log("Connected to MongoDB successfully"))
+        .catch((err) => console.error("MongoDB connection error:", err.message));
+} else {
+    console.warn("MONGO_URL is not defined in environment variables");
+}
 
 app.get("/", async (req, res) => {
-    res.send("hello world");
+    res.send("Stock Trading API is running");
 });
+
+const defaultOrigins = [
+    "https://dashboard-theta-one-42.vercel.app",
+    "https://stock-trading-nwil.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173"
+];
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
+    : defaultOrigins;
 
 app.use(
     cors({
-        origin: [
-            "https://dashboard-theta-one-42.vercel.app",
-            "https://stock-trading-nwil.vercel.app"
-        ],
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin) || defaultOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+            return callback(null, true);
+        },
         credentials: true
     })
 );
@@ -34,200 +56,173 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(userRoutes);
 
-
-
+// Database seed endpoints for initial testing (commented out by default)
 // app.get("/addTodatabase", async (req, res) => {
 //     let tempHoldings = [
-//         {
-//             name: "BHARTIARTL",
-//             qty: 2,
-//             avg: 538.05,
-//             price: 541.15,
-//             net: "+0.58%",
-//             day: "+2.99%",
-//         },
-//         {
-//             name: "HDFCBANK",
-//             qty: 2,
-//             avg: 1383.4,
-//             price: 1522.35,
-//             net: "+10.04%",
-//             day: "+0.11%",
-//         },
-//         {
-//             name: "HINDUNILVR",
-//             qty: 1,
-//             avg: 2335.85,
-//             price: 2417.4,
-//             net: "+3.49%",
-//             day: "+0.21%",
-//         },
-//         {
-//             name: "INFY",
-//             qty: 1,
-//             avg: 1350.5,
-//             price: 1555.45,
-//             net: "+15.18%",
-//             day: "-1.60%",
-//             isLoss: true,
-//         },
-//         {
-//             name: "ITC",
-//             qty: 5,
-//             avg: 202.0,
-//             price: 207.9,
-//             net: "+2.92%",
-//             day: "+0.80%",
-//         },
-//         {
-//             name: "KPITTECH",
-//             qty: 5,
-//             avg: 250.3,
-//             price: 266.45,
-//             net: "+6.45%",
-//             day: "+3.54%",
-//         },
-//         {
-//             name: "M&M",
-//             qty: 2,
-//             avg: 809.9,
-//             price: 779.8,
-//             net: "-3.72%",
-//             day: "-0.01%",
-//             isLoss: true,
-//         },
-//         {
-//             name: "RELIANCE",
-//             qty: 1,
-//             avg: 2193.7,
-//             price: 2112.4,
-//             net: "-3.71%",
-//             day: "+1.44%",
-//         },
-//         {
-//             name: "SBIN",
-//             qty: 4,
-//             avg: 324.35,
-//             price: 430.2,
-//             net: "+32.63%",
-//             day: "-0.34%",
-//             isLoss: true,
-//         },
-//         {
-//             name: "SGBMAY29",
-//             qty: 2,
-//             avg: 4727.0,
-//             price: 4719.0,
-//             net: "-0.17%",
-//             day: "+0.15%",
-//         },
-//         {
-//             name: "TATAPOWER",
-//             qty: 5,
-//             avg: 104.2,
-//             price: 124.15,
-//             net: "+19.15%",
-//             day: "-0.24%",
-//             isLoss: true,
-//         },
-//         {
-//             name: "TCS",
-//             qty: 1,
-//             avg: 3041.7,
-//             price: 3194.8,
-//             net: "+5.03%",
-//             day: "-0.25%",
-//             isLoss: true,
-//         },
-//         {
-//             name: "WIPRO",
-//             qty: 4,
-//             avg: 489.3,
-//             price: 577.75,
-//             net: "+18.08%",
-//             day: "+0.32%",
-//         },
-
-//     ]
-//     tempHoldings.forEach((item) => {
-//         let newHoldings = new holdingsModels({
-//             name: item.name,
-//             qty: item.ty,
-//             avg: item.avg,
-//             price: item.price,
-//             net: item.net,
-//             day: item.day
-//         })
-//         newHoldings.save();
-//     })
-//     res.send("data has initialized");
-// })
-
-// app.get("/addPositions", async (req, res) => {
-//     let tempPositions = [
-
-//         {
-//             product: "CNC",
-//             name: "EVEREADY",
-//             qty: 2,
-//             avg: 316.27,
-//             price: 312.35,
-//             net: "+0.58%",
-//             day: "-1.24%",
-//             isLoss: true,
-//         },
-//         {
-//             product: "CNC",
-//             name: "JUBLFOOD",
-//             qty: 1,
-//             avg: 3124.75,
-//             price: 3082.65,
-//             net: "+10.04%",
-//             day: "-1.35%",
-//             isLoss: true,
-//         },
-
-//     ]
-//     tempPositions.forEach((item) => {
-//         let newPositions = new PositionModel({
-//             name: item.name,
-//             qty: item.qty,
-//             avg: item.avg,
-//             price: item.price,
-//             net: item.net,
-//             day: item.day
-//         })
-//         newPositions.save();
-//     })
-//     res.send("data of Positions has initialized");
-
-// })
+//         { name: "BHARTIARTL", qty: 2, avg: 538.05, price: 541.15, net: "+0.58%", day: "+2.99%" },
+//         { name: "HDFCBANK", qty: 2, avg: 1383.4, price: 1522.35, net: "+10.04%", day: "+0.11%" }
+//     ];
+//     ...
+// });
 
 app.get("/allHoldings", async (req, res) => {
-    let allholdings = await holdingsModels.find({});
-    res.json(allholdings);
-})
+    try {
+        const allholdings = await holdingsModels.find({});
+        res.status(200).json(allholdings);
+    } catch (err) {
+        console.error("Error fetching holdings:", err.message);
+        res.status(500).json({ message: "Failed to fetch holdings", error: err.message });
+    }
+});
 
 app.get("/allPositions", async (req, res) => {
-    let allpositions = await PositionModel.find({});
-    res.json(allpositions);
-})
+    try {
+        const allpositions = await PositionModel.find({});
+        res.status(200).json(allpositions);
+    } catch (err) {
+        console.error("Error fetching positions:", err.message);
+        res.status(500).json({ message: "Failed to fetch positions", error: err.message });
+    }
+});
+
+app.get("/allOrders", async (req, res) => {
+    try {
+        const allOrders = await OrderModel.find({}).sort({ createdAt: -1 });
+        res.status(200).json(allOrders);
+    } catch (err) {
+        console.error("Error fetching orders:", err.message);
+        res.status(500).json({ message: "Failed to fetch orders", error: err.message });
+    }
+});
 
 app.post("/newOrder", async (req, res) => {
-    let newOrder = new OrderModel({
-        name: req.body.name,
-        qty: req.body.qty,
-        price: req.body.price,
-        mode: req.body.mode
-    })
-    await newOrder.save();
-    res.json(newOrder);
-})
+    try {
+        const { name, qty, price, mode, orderType } = req.body;
+
+        if (!name || !qty || !price || !mode) {
+            return res.status(400).json({
+                message: "Missing required order fields: name, qty, price, and mode are required"
+            });
+        }
+
+        const parsedQty = Number(qty);
+        const parsedPrice = Number(price);
+        const normalizedMode = String(mode).toUpperCase();
+        const cleanName = String(name).trim().toUpperCase();
+
+        if (isNaN(parsedQty) || parsedQty <= 0) {
+            return res.status(400).json({ message: "Quantity must be a positive number" });
+        }
+
+        if (isNaN(parsedPrice) || parsedPrice <= 0) {
+            return res.status(400).json({ message: "Price must be a positive number" });
+        }
+
+        if (!["BUY", "SELL"].includes(normalizedMode)) {
+            return res.status(400).json({ message: "Order mode must be either BUY or SELL" });
+        }
+
+        if (normalizedMode === "BUY") {
+            const existingHolding = await holdingsModels.findOne({ name: cleanName });
+
+            if (existingHolding) {
+                const currentQty = existingHolding.qty;
+                const currentAvg = existingHolding.avg;
+                const newTotalQty = currentQty + parsedQty;
+                const newAvgPrice = ((currentQty * currentAvg) + (parsedQty * parsedPrice)) / newTotalQty;
+                const netPercent = (((parsedPrice - newAvgPrice) / newAvgPrice) * 100).toFixed(2);
+
+                existingHolding.qty = newTotalQty;
+                existingHolding.avg = Number(newAvgPrice.toFixed(2));
+                existingHolding.price = parsedPrice;
+                existingHolding.net = netPercent >= 0 ? `+${netPercent}%` : `${netPercent}%`;
+                await existingHolding.save();
+            } else {
+                const newHolding = new holdingsModels({
+                    name: cleanName,
+                    qty: parsedQty,
+                    avg: parsedPrice,
+                    price: parsedPrice,
+                    net: "+0.00%",
+                    day: "+0.00%"
+                });
+                await newHolding.save();
+            }
+
+            const newOrder = new OrderModel({
+                name: cleanName,
+                qty: parsedQty,
+                price: parsedPrice,
+                mode: "BUY",
+                orderType: orderType || "MARKET",
+                status: "COMPLETED"
+            });
+            await newOrder.save();
+
+            return res.status(201).json({
+                message: "Buy order executed successfully and portfolio updated",
+                order: newOrder
+            });
+        } else if (normalizedMode === "SELL") {
+            const existingHolding = await holdingsModels.findOne({ name: cleanName });
+
+            if (!existingHolding || existingHolding.qty < parsedQty) {
+                const availableQty = existingHolding ? existingHolding.qty : 0;
+                const rejectedOrder = new OrderModel({
+                    name: cleanName,
+                    qty: parsedQty,
+                    price: parsedPrice,
+                    mode: "SELL",
+                    orderType: orderType || "MARKET",
+                    status: "REJECTED",
+                    reason: `Insufficient holdings. Available: ${availableQty}, Requested: ${parsedQty}`
+                });
+                await rejectedOrder.save();
+
+                return res.status(400).json({
+                    message: `Sell order rejected: Insufficient holdings (Available: ${availableQty}, Requested: ${parsedQty})`,
+                    order: rejectedOrder
+                });
+            }
+
+            if (existingHolding.qty === parsedQty) {
+                await holdingsModels.deleteOne({ _id: existingHolding._id });
+            } else {
+                existingHolding.qty -= parsedQty;
+                existingHolding.price = parsedPrice;
+                const netPercent = (((parsedPrice - existingHolding.avg) / existingHolding.avg) * 100).toFixed(2);
+                existingHolding.net = netPercent >= 0 ? `+${netPercent}%` : `${netPercent}%`;
+                await existingHolding.save();
+            }
+
+            const newOrder = new OrderModel({
+                name: cleanName,
+                qty: parsedQty,
+                price: parsedPrice,
+                mode: "SELL",
+                orderType: orderType || "MARKET",
+                status: "COMPLETED"
+            });
+            await newOrder.save();
+
+            return res.status(201).json({
+                message: "Sell order executed successfully and holdings deducted",
+                order: newOrder
+            });
+        }
+    } catch (err) {
+        console.error("Error executing order:", err);
+        return res.status(500).json({
+            message: "Internal server error while executing order",
+            error: err.message
+        });
+    }
+});
 
 app.get("/home", async (req, res) => {
     res.send("server is Listening");
-})
+});
 
 app.listen(PORT, () => {
-    console.log("server is listening on PORT 3000");
-})
+    console.log(`Server is listening on PORT ${PORT}`);
+});
