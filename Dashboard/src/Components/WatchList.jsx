@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { watchlist } from '../data/data.js';
 import { Tooltip, Grow } from "@mui/material";
-import { BarChartOutlined, Dataset, KeyboardArrowDown, KeyboardArrowUp, MoreHoriz } from "@mui/icons-material";
+import { BarChartOutlined, KeyboardArrowDown, KeyboardArrowUp, MoreHoriz } from "@mui/icons-material";
 import { DoughnutChart } from './DoughnutChart.jsx';
-
+import { GeneralContext } from './GeneralContext.jsx';
 
 export const WatchList = () => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const labels = watchlist.map((subarray) => subarray["name"]);
+  const filteredWatchlist = watchlist.filter((stock) =>
+    stock.name.toLowerCase().includes(searchTerm.toLowerCase().trim())
+  );
+
+  const labels = filteredWatchlist.map((item) => item.name);
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Price',
-        data: watchlist.map((stock) => stock.price),
+        data: filteredWatchlist.map((stock) => stock.price),
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
           'rgba(54, 162, 235, 0.5)',
@@ -43,33 +48,40 @@ export const WatchList = () => {
           type="text"
           name="search"
           id="search"
-          placeholder='Search eg:infy,bse,nifty fut weekly,gold mcx'
+          placeholder='Search eg: infy, bse, tcs...'
           className='search'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <span className='counts'>   {watchlist.length}/50</span>
+        <span className='counts'>{filteredWatchlist.length}/50</span>
       </div>
+
       <ul className='list'>
-        {watchlist.map((stock, index) => {
-          return (
-            <WatchListItem stock={stock} key={index} />
-          );
-        })}
+        {filteredWatchlist.length > 0 ? (
+          filteredWatchlist.map((stock, index) => (
+            <WatchListItem stock={stock} key={stock.name || index} />
+          ))
+        ) : (
+          <li style={{ padding: "16px", textAlign: "center", color: "#888", fontSize: "0.85rem" }}>
+            No stocks found matching "{searchTerm}"
+          </li>
+        )}
       </ul>
-      <DoughnutChart data={data} />
+
+      {filteredWatchlist.length > 0 && <DoughnutChart data={data} />}
     </div>
-  )
-}
+  );
+};
 
 export const WatchListItem = ({ stock }) => {
-
   const [showWatchListAction, setShowListAction] = useState(false);
 
-  const handleMouseEnter = (e) => {
+  const handleMouseEnter = () => {
     setShowListAction(true);
-  }
-  const handleMouseLeave = (e) => {
+  };
+  const handleMouseLeave = () => {
     setShowListAction(false);
-  }
+  };
 
   return (
     <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -77,39 +89,53 @@ export const WatchListItem = ({ stock }) => {
         <p className={stock.isDown ? "down" : "up"}>{stock.name}</p>
         <div className='itemInfo'>
           <span className='percent'>{stock.percent}</span>
-          {
-            stock.isDown ?
-              (<KeyboardArrowDown className="down" />)
-              : (<KeyboardArrowUp className="down" />)
-          }
+          {stock.isDown ? (
+            <KeyboardArrowDown className="down" />
+          ) : (
+            <KeyboardArrowUp className="up" />
+          )}
           <span className='price'>{stock.price}</span>
-
         </div>
       </div>
-      {showWatchListAction && <WatchListAction uid={stock.name} />}
+      {showWatchListAction && <WatchListAction stock={stock} />}
     </li>
   );
-}
+};
 
+const WatchListAction = ({ stock }) => {
+  const { openBuyWindow } = useContext(GeneralContext);
 
-const WatchListAction = ({ uid }) => {
+  const handleBuy = (e) => {
+    e.stopPropagation();
+    openBuyWindow(stock.name, "BUY", stock.price);
+  };
+
+  const handleSell = (e) => {
+    e.stopPropagation();
+    openBuyWindow(stock.name, "SELL", stock.price);
+  };
+
   return (
-    <span>
+    <span className="actions-wrapper">
       <Tooltip
         title="Buy (B)"
         placement='top'
         arrow
         TransitionComponent={Grow}
       >
-        <button className='buy'>Buy</button>
+        <button type="button" className='buy' onClick={handleBuy}>
+          Buy
+        </button>
       </Tooltip>
       <Tooltip
-        title="sell (S)"
+        title="Sell (S)"
         placement='top'
         arrow
         TransitionComponent={Grow}
       >
-        <button className='sell'>Sell</button>
+        <button type="button" className='sell' onClick={handleSell}>
+          Sell
+        </button>
       </Tooltip>
       <Tooltip
         title="Analytics (A)"
@@ -117,7 +143,7 @@ const WatchListAction = ({ uid }) => {
         arrow
         TransitionComponent={Grow}
       >
-        <button className='actions'>
+        <button type="button" className='actions'>
           <BarChartOutlined className='icon' />
         </button>
       </Tooltip>
@@ -127,11 +153,10 @@ const WatchListAction = ({ uid }) => {
         arrow
         TransitionComponent={Grow}
       >
-        <button className='actions'>
+        <button type="button" className='actions'>
           <MoreHoriz className='icon' />
         </button>
       </Tooltip>
-
     </span>
   );
 };
