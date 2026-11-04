@@ -20,12 +20,32 @@ app.get("/", async (req, res) => {
     res.send("hello world");
 });
 
+const defaultOrigins = [
+    "https://dashboard-theta-one-42.vercel.app",
+    "https://stock-trading-nwil.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174"
+];
+
+const envOrigins = [
+    process.env.FRONTEND_URL,
+    process.env.DASHBOARD_URL,
+    ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(",") : [])
+].filter(Boolean).map((o) => o.trim());
+
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
+
 app.use(
     cors({
-        origin: [
-            "https://dashboard-theta-one-42.vercel.app",
-            "https://stock-trading-nwil.vercel.app"
-        ],
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin) || defaultOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+            return callback(null, true);
+        },
         credentials: true
     })
 );
