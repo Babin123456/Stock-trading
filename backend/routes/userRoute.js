@@ -68,8 +68,8 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ message: "All fields are required" });
         }
 
-        if (typeof password !== "string" || password.length < 6) {
-            return res.status(400).json({ message: "Password must be at least 6 characters long" });
+        if (typeof password !== "string") {
+            return res.status(400).json({ message: "Invalid password format" });
         }
 
         const normalizedEmail = typeof email === "string" ? email.toLowerCase().trim() : "";
